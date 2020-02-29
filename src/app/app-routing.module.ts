@@ -5,7 +5,20 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'search-calories',
+    loadChildren: () => import('./Search Calories/search-calories.module').then( m => m.SearchCaloriesPageModule)
+  },
+  {
+    path: 'search-ingredients',
+    loadChildren: () => import('./Search Ingredients/search-ingredients.module').then( m => m.SearchIngredientsPageModule)
+  },
+  {
+    path: 'search-meal-type',
+    loadChildren: () => import('./Search MealType/search-meal-type.module').then( m => m.SearchMealTypePageModule)
   }
+
 ];
 @NgModule({
   imports: [
