@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button text = "" icon="chevron-back-outline">
+      </ion-back-button>
+    </ion-buttons>
     <ion-title>Search Ingredients</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-label> How many ingredients? </ion-label>
+    <ion-input placeholder="000" type="number" [(ngModel)]="noOfIngredients"> </ion-input>
+    <ion-button shape="round" (click) = "send()"> Send </ion-button> <br/>
+      <ion-label> Enter Ingredient? </ion-label>
+      <ion-input placeholder=" " type="text"> </ion-input>
 
+    
+      
+     
+  <ion-button shape="round" (click) = "choice()"> Generate </ion-button> <br/>
 </ion-content>

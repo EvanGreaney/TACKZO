@@ -1,5 +1,7 @@
 {
   "name": "TACKZO",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
