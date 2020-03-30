@@ -9,14 +9,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-label> How many ingredients? </ion-label>
-    <ion-input placeholder="000" type="number" [(ngModel)]="noOfIngredients"> </ion-input>
-    <ion-button shape="round" (click) = "send()"> Send </ion-button> <br/>
-      <ion-label> Enter Ingredient? </ion-label>
-      <ion-input placeholder=" " type="text"> </ion-input>
-
-    
-      
-     
+  <ion-list lines="none">
+    <form [formGroup]="ingredientsList">
+      <ion-item *ngFor="let control of ingredientsList.controls | keyvalue">
+        <ion-input required type="text" [formControlName]="control.key" placeHolder="ingredient"></ion-input>
+        <ion-icon (click)="removeIngredient(control)" name="remove-ingredient"></ion-icon>
+      </ion-item>
+    </form>
+  </ion-list>
+  <ion-button expand="full" color="light" (click)="addIngredient()">Add Ingredient</ion-button>
   <ion-button shape="round" (click) = "choice()"> Generate </ion-button> <br/>
 </ion-content>

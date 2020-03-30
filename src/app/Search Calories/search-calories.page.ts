@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
 
-
 @Component({
   selector: 'app-search-calories',
   templateUrl: './search-calories.page.html',
@@ -33,4 +32,5 @@ export class SearchCaloriesPage implements OnInit {
     this.router.navigate(['meal-choice'])
   }
 
+  
 }
