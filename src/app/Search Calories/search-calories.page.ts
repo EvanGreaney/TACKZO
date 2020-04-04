@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
+import {GetRecipeProvider} from 'Providers/GetRecipebyCal/GetRecipe';
 
 @Component({
   selector: 'app-search-calories',
@@ -9,14 +10,15 @@ import{ Storage } from '@ionic/storage';
 })
 export class SearchCaloriesPage implements OnInit {
   noOfMeals: number;
-  maxNoOfCal: number;
+  maxCalories: number;
   noOfPeople:number;
   calBreakfast:number;
   calLunch:number;
   calDinner:number;
+  Recipes: any[] = [];
 
 
-  constructor(private router: Router,private storage:Storage) { }
+  constructor(private router: Router,private storage:Storage/*,private getRecipe: GetRecipeProvider*/) { }
 
   ngOnInit() {
   }
@@ -24,12 +26,16 @@ export class SearchCaloriesPage implements OnInit {
   choice()
   {
     this.storage.set("noOfMeals", this.noOfMeals);
-    this.storage.set("maxNoOfCal", this.maxNoOfCal);
+    this.storage.set("maxNoOfCal", this.maxCalories);
     this.storage.set("noOfPeople", this.noOfPeople);
     this.storage.set("calBreakfast", this.calBreakfast);
     this.storage.set("calLunch", this.calLunch);
     this.storage.set("calDinner", this.calDinner);    
     this.router.navigate(['meal-choice'])
+/*
+    this.getRecipe.getRecipe().subscribe(data =>{
+      this.Recipes = data.Recipes;
+    })*/
   }
 
   
