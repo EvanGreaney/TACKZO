@@ -7,6 +7,7 @@ import {GetRecipeProvider} from 'Providers/GetRecipebyCal/GetRecipe';
   selector: 'app-search-calories',
   templateUrl: './search-calories.page.html',
   styleUrls: ['./search-calories.page.scss'],
+  providers: [GetRecipeProvider]
 })
 export class SearchCaloriesPage implements OnInit {
   noOfMeals: number;
