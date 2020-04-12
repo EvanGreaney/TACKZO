@@ -14,7 +14,9 @@
       <ion-item *ngFor="let control of ingredientsList.controls | keyvalue">
         <ion-input required type="text" [formControlName]="control.key" placeHolder="ingredient"></ion-input>
         <ion-icon (click)="removeIngredient(control)" name="remove-ingredient"></ion-icon>
-      </ion-item>
+      </ion-item> <br />
+      <ion-label> How many servings? </ion-label>
+    <ion-input placeholder="000" type="number"> </ion-input>
     </form>
   </ion-list>
   <ion-button expand="full" color="light" (click)="addIngredient()">Add Ingredient</ion-button>

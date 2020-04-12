@@ -9,6 +9,7 @@ import{ Storage } from '@ionic/storage';
 })
 export class SearchMealTypePage implements OnInit {
   mealType:String;
+  servings:number;
 
   constructor(private router: Router,private storage:Storage) { }
 
@@ -17,8 +18,10 @@ export class SearchMealTypePage implements OnInit {
 
   choice()
   {
-    this.storage.set("mealType",this.mealType);
     this.router.navigate(['meal-choice'])
+    this.storage.set("mealType",this.mealType);
+    console.log("meal: ", this.mealType);
+    console.log("servings: ", this.servings);
   }
 
 }

@@ -32,6 +32,13 @@ export class SearchCaloriesPage implements OnInit {
     this.storage.set("calBreakfast", this.calBreakfast);
     this.storage.set("calLunch", this.calLunch);
     this.storage.set("calDinner", this.calDinner);    
+    //debugging the storage of user input
+    console.log("number of meals: ", this.noOfMeals);
+    console.log("Max number of calories per meal: ", this.maxCalories);
+    console.log("number of people: ", this.noOfPeople);
+    console.log("number of calories for breakfast: ", this.calBreakfast);
+    console.log("number of calories for lunch: ", this.calLunch);
+    console.log("number of calories for dinner: ", this.calDinner);
     this.router.navigate(['meal-choice'])
 /*
     this.getRecipe.getRecipe().subscribe(data =>{
