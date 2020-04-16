@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 
 export class IngredientsService {
-
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -17,7 +17,7 @@ export class IngredientsService {
   constructor(private http: HttpClient) { }
 
   addIngredients(ingredients: Ingredients): Observable<any> {
-    return this.http.post<Ingredients>('http://localhost:4000/api/create', ingredients, this.httpOptions)
+    return this.http.post<Ingredients>('http://localhost:4000/api/ingredients/create', ingredients, this.httpOptions)
     .pipe(
       catchError(this.handleError<Ingredients>('Add Ingredients'))
     ); 
@@ -35,7 +35,7 @@ export class IngredientsService {
     return this.http.get<Ingredients[]>('http://localhost:4000/api')
      .pipe(
       tap(ingredients => console.log('All Ingredient Lists fetched!')),
-      catchError(this.handleError<Ingredients[]>('Get all Ingredients', []))
+      catchError(this.handleError<Ingredients[]>('Get all Ingredients'))
     );
   }
 

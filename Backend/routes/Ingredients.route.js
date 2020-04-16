@@ -1,8 +1,8 @@
 const express = require('express');
 const ingredientsRoute = express.Router();
-const IngredientsModel = require('../schemas/Ingredients')
+const IngredientsModel = require('../schemas/ingredients')
 
-//GET ALL ingresdient Lists
+//GET ALL ingredient Lists
 ingredientsRoute.get('/', function(req,res,next) {
     IngredientsModel.find(function(err, ingredients){
         if(err) return next(err);
@@ -19,7 +19,7 @@ ingredientsRoute.get('/ingredients/:id', function(req,res,next) {
 });
 
 //POST an Ingredients List
-ingredientsRoute.post('/create', function(req,res,next) {
+ingredientsRoute.post('/ingredients/create', function(req,res,next) {
     IngredientsModel.create(req.body, function(err,post) {
         if(err) return next(err);
         res.json(post);

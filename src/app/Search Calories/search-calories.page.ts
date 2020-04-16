@@ -1,25 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
-import {GetRecipeProvider} from 'Providers/GetRecipebyCal/GetRecipe';
+import { CaloriesService } from '../DataTransfers/calories.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-calories',
   templateUrl: './search-calories.page.html',
   styleUrls: ['./search-calories.page.scss'],
-  providers: [GetRecipeProvider]
 })
 export class SearchCaloriesPage implements OnInit {
-  noOfMeals: number;
-  maxCalories: number;
-  noOfPeople:number;
-  calBreakfast:number;
-  calLunch:number;
-  calDinner:number;
+  public noOfMeals: number;
+  public maxCalories: number;
+  public noOfPeople:number;
+  public calBreakfast:number;
+  public calLunch:number;
+  public calDinner:number;
   Recipes: any[] = [];
+  public caloriesList: FormGroup;
 
 
-  constructor(private router: Router,private storage:Storage/*,private getRecipe: GetRecipeProvider*/) { }
+  constructor(private router: Router,
+    private storage:Storage,
+    private caloriesApi: CaloriesService,
+    public formBuilder: FormBuilder, 
+    private zone: NgZone ) 
+    { 
+      this.caloriesList = formBuilder.group({
+        noOfMeals: [' ', Validators.required],
+        maxCalories: [' ', Validators.required],
+        noOfPeople:[' ', Validators.required],
+        calBreakfast:[' '],
+        calLunch:[' '],
+        calDinner:[' ']
+      });
+    }
 
   ngOnInit() {
   }
@@ -39,12 +54,25 @@ export class SearchCaloriesPage implements OnInit {
     console.log("number of calories for breakfast: ", this.calBreakfast);
     console.log("number of calories for lunch: ", this.calLunch);
     console.log("number of calories for dinner: ", this.calDinner);
-    this.router.navigate(['meal-choice'])
-/*
-    this.getRecipe.getRecipe().subscribe(data =>{
-      this.Recipes = data.Recipes;
-    })*/
   }
-
   
+  onFormSubmit(){
+    //sending the input to the database
+    if(!this.caloriesList.valid)
+    {
+      console.log("Form empty")
+      return false;
+    }
+    else
+    {
+        this.caloriesApi.addCalories(this.caloriesList.value)
+        .subscribe((res) => {
+          this.zone.run(() => {
+            console.log("All user input added to api")
+            this.caloriesList.reset();
+            this.router.navigate(['meal-choice'])
+          }
+        )})
+    }//else
+  }
 }

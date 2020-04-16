@@ -24,6 +24,8 @@ mongoose.connect(dataBaseConfig.db,
 //set up the port with express 
 const app = express();
 const ingredientsRoute = require('./routes/Ingredients.route')
+const foodsRoute = require('./routes/food.route')
+const caloriesRoute = require('./routes/calories.route')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -32,6 +34,8 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../build')));
 app.use('/', express.static(path.join(__dirname, '../build/static')));
 app.use('/api', ingredientsRoute)
+app.use('/api', foodsRoute)
+app.use('/api', caloriesRoute)
 
 // PORT number
 const port = process.env.PORT || 4000;

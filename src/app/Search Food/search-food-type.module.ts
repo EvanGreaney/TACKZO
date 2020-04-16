@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 
-import { SearchCaloriesPageRoutingModule } from './search-calories-routing.module';
-import { SearchCaloriesPage } from './search-calories.page';
+import { SearchFoodTypePageRoutingModule } from './search-food-routing.module';
+
+import { SearchFoodTypePage } from './search-food-type.page';
 
 @NgModule({
   imports: [
@@ -12,8 +14,8 @@ import { SearchCaloriesPage } from './search-calories.page';
     ReactiveFormsModule,
     FormsModule,
     IonicModule,
-    SearchCaloriesPageRoutingModule
+    SearchFoodTypePageRoutingModule
   ],
-  declarations: [SearchCaloriesPage]
+  declarations: [SearchFoodTypePage]
 })
-export class SearchCaloriesPageModule {}
+export class SearchFoodTypePageModule {}

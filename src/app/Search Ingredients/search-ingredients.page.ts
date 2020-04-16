@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { IngredientsService } from '../DataTransfers/ingredients.service';
+
 @Component({
   selector: 'app-search-ingredients',
   templateUrl: './search-ingredients.page.html',
@@ -21,7 +22,7 @@ export class SearchIngredientsPage implements OnInit {
      private zone: NgZone )
   { 
       this.ingredientsList = formBuilder.group({
-      ingredient: ['', Validators.required],
+      ingredients: ['', Validators.required],
       servings: [' ']
     });
   }
@@ -34,12 +35,26 @@ export class SearchIngredientsPage implements OnInit {
     this.ingredientsList.addControl('ingredient' + this.ingredientNo, new FormControl('', Validators.required));
     this.add();
   }
-  removeIngredient(control){
-    this.ingredientsList.removeControl(control.key);
-  }
-  choice()
+  add()
   {
-    if(!this.ingredientsList.valid)
+     this.storage.set('ingredients',this.ingredients)
+        .then(
+          () => {
+            console.log('ingredient added: ' ,this.ingredients);
+          },
+          error => console.error('Error storing ingredients', error)
+        );
+      this.storage.set('servings', this.servings)
+      .then(
+        () => {
+          console.log('Number of servings: ' , this.servings);
+        },
+        error => console.error('Error storing item', error)
+      );
+  }//add
+  
+onFormSubmit(){
+  if(!this.ingredientsList.valid)
     {
       console.log("Form empty")
       return false;
@@ -55,28 +70,7 @@ export class SearchIngredientsPage implements OnInit {
           }
         )})
     }//else
-    
-    
-  }
-  
-  add()
-  {
-     this.storage.set('ingredients',this.ingredients)
-        .then(
-          () => {
-            console.log('Ingredient Stored');
-          },
-          error => console.error('Error storing item', error)
-        );
-      this.storage.set('servings', this.servings)
-      .then(
-        () => {
-          console.log('Number of servings Stored');
-        },
-        error => console.error('Error storing item', error)
-      );
-  }//add
-  
+}
   
 
 } 

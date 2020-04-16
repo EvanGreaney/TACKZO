@@ -15,8 +15,8 @@ const routes: Routes = [
     loadChildren: () => import('./Search Ingredients/search-ingredients.module').then( m => m.SearchIngredientsPageModule)
   },
   {
-    path: 'search-meal-type',
-    loadChildren: () => import('./Search MealType/search-meal-type.module').then( m => m.SearchMealTypePageModule)
+    path: 'search-food',
+    loadChildren: () => import('./Search Food/search-food-type.module').then( m => m.SearchFoodTypePageModule)
   },
   {
     path: 'meal-choice',

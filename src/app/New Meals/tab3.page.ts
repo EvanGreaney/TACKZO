@@ -14,9 +14,9 @@ export class Tab3Page {
   {
     this.router.navigate(['search-calories'])
   }
-  mealType()
+  food()
   {
-    this.router.navigate(['search-meal-type'])
+    this.router.navigate(['search-food'])
   }
   ingredients()
   {
