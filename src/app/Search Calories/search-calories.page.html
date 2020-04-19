@@ -11,20 +11,12 @@
 <ion-content>
   <ion-list >
     <form [formGroup] = "caloriesList" (ngSubmit) = "onFormSubmit()">
-      <ion-label> How many meals are required? </ion-label>
-      <ion-input placeholder="000" type="number" formControlName="noOfMeals" required> </ion-input>
+      
       <ion-label> Maximum number of calories per person? </ion-label>
       <ion-input placeholder="000" type="number" formControlName = "maxCalories" required> </ion-input>
-      <ion-label> How many people are eating? </ion-label>
-      <ion-input placeholder="000" type="number" formControlName= "noOfPeople" required> </ion-input>
-      <ion-label> Maximum number of calories for breakfast? </ion-label>
-      <ion-input placeholder="000" type="number" formControlName = "calBreakfast"> </ion-input>
-      <ion-label> Maximum number of calories for lunch? </ion-label>
-      <ion-input placeholder="000" type="number" formControlName = "calLunch"> </ion-input>
-      <ion-label> Maximum number of calories for dinner? </ion-label>
-      <ion-input placeholder="000" type="number" formControlName = "calDinner"> </ion-input>
-      <ion-button shape="round" (click) = "choice()"> Generate </ion-button> <br/>
+     <!-- <ion-button shape="round" (click) = "choice()"> Generate </ion-button> <br/> -->
       <ion-button shape="round" (click) = "searchRecipes()"> Debug </ion-button> <br/>
+      <ion-button type="submit" color="primary" shape="full" expand="block">Submit form</ion-button>
     </form>
     </ion-list>
 
