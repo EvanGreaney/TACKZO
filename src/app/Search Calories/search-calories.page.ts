@@ -2,7 +2,9 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
 import { CaloriesService } from '../DataTransfers/calories.service';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-calories',
@@ -16,15 +18,18 @@ export class SearchCaloriesPage implements OnInit {
   public calBreakfast:number;
   public calLunch:number;
   public calDinner:number;
-  Recipes: any[] = [];
+  //API Stuff
+  public Recipes: Array<any>;
+  apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
   public caloriesList: FormGroup;
 
 
   constructor(private router: Router,
-    private storage:Storage,
+    public storage:Storage,
     private caloriesApi: CaloriesService,
     public formBuilder: FormBuilder, 
-    private zone: NgZone ) 
+    private zone: NgZone,
+    public http: HttpClient ) 
     { 
       this.caloriesList = formBuilder.group({
         noOfMeals: [' ', Validators.required],
@@ -54,6 +59,30 @@ export class SearchCaloriesPage implements OnInit {
     console.log("number of calories for breakfast: ", this.calBreakfast);
     console.log("number of calories for lunch: ", this.calLunch);
     console.log("number of calories for dinner: ", this.calDinner);
+
+    this.getRecipe().subscribe(data =>{
+      this.Recipes = data;
+      console.log( this.Recipes);
+      this.storage.set("Recipes",this.Recipes);
+      console.log("maxCalories: ",this.maxCalories);
+      console.log(this.Recipes);
+      console.log("Storage: ",this.storage.get("Recipes"));
+    })
+  }
+  //API Stuff
+  getRecipe():Observable<any>{
+    this.storage.get("maxNoOfCal").then((getCalories)=>{
+       console.log("Max Number of calories",getCalories);
+    });
+    return this.http.get("https://api.spoonacular.com/recipes/findByNutrients?maxCalories="+this.maxCalories+"&number=1&apiKey="+this.apiKey)
+      
+  }
+  //API Stuff
+  searchRecipes()
+  {
+    console.log(this.maxCalories);
+    console.log(this.Recipes);
+    console.log("Storage: ",this.storage.get("Recipes"));
   }
   
   onFormSubmit(){
@@ -70,7 +99,6 @@ export class SearchCaloriesPage implements OnInit {
           this.zone.run(() => {
             console.log("All user input added to api")
             this.caloriesList.reset();
-            this.router.navigate(['meal-choice'])
           }
         )})
     }//else

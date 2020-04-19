@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list lines="full">
+  <ion-list >
     <form [formGroup] = "caloriesList" (ngSubmit) = "onFormSubmit()">
       <ion-label> How many meals are required? </ion-label>
       <ion-input placeholder="000" type="number" formControlName="noOfMeals" required> </ion-input>
@@ -24,7 +24,18 @@
       <ion-label> Maximum number of calories for dinner? </ion-label>
       <ion-input placeholder="000" type="number" formControlName = "calDinner"> </ion-input>
       <ion-button shape="round" (click) = "choice()"> Generate </ion-button> <br/>
+      <ion-button shape="round" (click) = "searchRecipes()"> Debug </ion-button> <br/>
     </form>
-  </ion-list>
+    </ion-list>
+
+  <ion-content>
+    <ion-card *ngFor="let recipe of Recipes">
+      <img  width="200" height="200"src = "{{recipe.urlToImage}}"/>
+      <ion-card-header>
+        {{recipe.title}}
+      </ion-card-header>
+      
+    </ion-card>
+  </ion-content>
  
 </ion-content>
