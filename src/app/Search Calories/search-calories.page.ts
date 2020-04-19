@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
-import {GetRecipeProvider} from 'Providers/GetRecipebyCal/GetRecipe';
+import {GetRecipeProvider} from '../Providers/GetRecipeByCal/GetRecipe';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-search-calories',
@@ -11,15 +14,17 @@ import {GetRecipeProvider} from 'Providers/GetRecipebyCal/GetRecipe';
 })
 export class SearchCaloriesPage implements OnInit {
   noOfMeals: number;
-  maxCalories: number;
+  public maxCalories: number;
   noOfPeople:number;
   calBreakfast:number;
   calLunch:number;
   calDinner:number;
-  Recipes: any[] = [];
+  public Recipes: Array<any>;
+  //public RecipeStore: Array<String>;
+  apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
 
 
-  constructor(private router: Router,private storage:Storage/*,private getRecipe: GetRecipeProvider*/) { }
+  constructor(public http: HttpClient,private router: Router,public storage:Storage) { }
 
   ngOnInit() {
   }
@@ -39,12 +44,32 @@ export class SearchCaloriesPage implements OnInit {
     console.log("number of calories for breakfast: ", this.calBreakfast);
     console.log("number of calories for lunch: ", this.calLunch);
     console.log("number of calories for dinner: ", this.calDinner);
-    this.router.navigate(['meal-choice'])
-/*
-    this.getRecipe.getRecipe().subscribe(data =>{
-      this.Recipes = data.Recipes;
-    })*/
+    //this.router.navigate(['meal-choice'])
+
+    this.getRecipe().subscribe(data =>{
+      this.Recipes = data;
+      console.log( this.Recipes);
+      //this.RecipeStore = JSON.stringify(this.Recipes);
+      this.storage.set("Recipes",this.Recipes);
+    })
+    //console.log( this.RecipeStore);
   }
 
+  getRecipe():Observable<any>{
+    this.storage.get("maxNoOfCal").then((getCalories)=>{
+       console.log("Max Number of calories",getCalories);
+    });
+    return this.http.get("https://api.spoonacular.com/recipes/findByNutrients?maxCalories="+this.maxCalories+"&number=1&apiKey="+this.apiKey)
+      
+  }
+
+  searchRecipes()
+  {
+    console.log(this.maxCalories);
+    console.log(this.Recipes);
+    console.log("Storage: ",this.storage.get("Recipes"));
+  }
+
+  
   
 }

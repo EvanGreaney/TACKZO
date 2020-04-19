@@ -23,6 +23,17 @@
     <ion-label> Maximum number of calories for dinner? </ion-label>
     <ion-input placeholder="000" type="number" [(ngModel)] = "calDinner"> </ion-input>
     <ion-button shape="round" (click) = "choice()"> Generate </ion-button> <br/>
+    <ion-button shape="round" (click) = "searchRecipes()"> Check Recipes </ion-button> <br/>
   </ion-list>
+
+  <ion-content>
+    <ion-card *ngFor="let recipe of Recipes">
+      <img  width="200" height="200"src = "{{recipe.urlToImage}}"/>
+      <ion-card-header>
+        {{recipe.title}}
+      </ion-card-header>
+      
+    </ion-card>
+  </ion-content>
  
 </ion-content>

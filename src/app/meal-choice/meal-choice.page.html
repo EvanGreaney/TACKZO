@@ -9,5 +9,10 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card *ngFor="let recipe of genRecipe">
+    <img  width="200" height="200"src = "{{recipe.Image}}"/>
+    <ion-card-header>
+      {{recipe.title}}
+    </ion-card-header>
+  </ion-card>
 </ion-content>

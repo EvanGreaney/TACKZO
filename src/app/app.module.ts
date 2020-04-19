@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
-import {GetRecipeProvider} from 'Providers/GetRecipeByCal/GetRecipe';
+import {GetRecipeProvider} from '../app/Providers/GetRecipeByCal/GetRecipe';
 
 @NgModule({
   declarations: [AppComponent],
