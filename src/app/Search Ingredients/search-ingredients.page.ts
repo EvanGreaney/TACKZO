@@ -10,10 +10,12 @@ import { IngredientsService } from '../DataTransfers/ingredients.service';
   styleUrls: ['./search-ingredients.page.scss'],
 })
 export class SearchIngredientsPage implements OnInit {
-  public ingredients: Array<String>;
+  public ingredient1: String;
+  public ingredient2: String;
+  public ingredient3: String;
+  public ingredient4: String;
+  public ingredient5: String;
   public ingredientsList: FormGroup;
-  private ingredientNo: number = 1;
-  
 
   constructor(private router: Router,
      private storage:Storage, 
@@ -22,31 +24,31 @@ export class SearchIngredientsPage implements OnInit {
      private zone: NgZone )
   { 
       this.ingredientsList = formBuilder.group({
-    ingredients:this.formBuilder.array([''], Validators.required)
-     
+      ingredient1:[' ', Validators.required],
+      ingredient2:[' '],
+      ingredient3:[' '],
+      ingredient4:[' '],
+      ingredient5:[' '],
     });
   }
 
   ngOnInit() {
   }
-
-  addIngredient(){
-    this.ingredientNo++;
-    this.ingredientsList.addControl('ingredient' + this.ingredientNo, new FormControl(this.formBuilder.array([''], Validators.required)));
-    this.add();
-  }
-  add()
-  {
-     this.storage.set('ingredients',this.ingredients)
-        .then(
-          () => {
-            console.log('ingredient added: ' ,this.ingredients);
-          },
-          error => console.error('Error storing ingredients', error)
-        );
-  }//add
   
 onFormSubmit(){
+  //add form input to local storage
+  this.ingredient1 = this.ingredientsList.value['ingredient1'];
+  this.storage.set("ingredient1",this.ingredient1);
+  this.ingredient2 = this.ingredientsList.value['ingredient2'];
+  this.storage.set("ingredient2",this.ingredient2);
+  this.ingredient3 = this.ingredientsList.value['ingredient3'];
+  this.storage.set("ingredient3",this.ingredient3);
+  this.ingredient4 = this.ingredientsList.value['ingredient4'];
+  this.storage.set("ingredient4",this.ingredient4);
+  this.ingredient5 = this.ingredientsList.value['ingredient5'];
+  this.storage.set("ingredient5",this.ingredient5);
+
+  console.log("Ingredients Added " + this.ingredient1 + " " + this.ingredient2 + " " + this.ingredient3 + " " + this.ingredient4 + " " + this.ingredient5);
   if(!this.ingredientsList.valid)
     {
       console.log("Form empty")
@@ -59,7 +61,6 @@ onFormSubmit(){
           this.zone.run(() => {
             console.log("Ingredient added to api")
             this.ingredientsList.reset();
-            this.router.navigate(['meal-choice'])
           }
         )})
     }//else
