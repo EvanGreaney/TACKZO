@@ -18,7 +18,6 @@ export class SearchCaloriesPage implements OnInit {
   apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
   public caloriesList: FormGroup;
 
-
   constructor(private router: Router,
     public storage:Storage,
     private caloriesApi: CaloriesService,

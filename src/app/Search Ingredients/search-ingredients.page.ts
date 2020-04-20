@@ -13,7 +13,7 @@ export class SearchIngredientsPage implements OnInit {
   public ingredients: Array<String>;
   public ingredientsList: FormGroup;
   private ingredientNo: number = 1;
-  public servings: number;
+  
 
   constructor(private router: Router,
      private storage:Storage, 
@@ -22,8 +22,8 @@ export class SearchIngredientsPage implements OnInit {
      private zone: NgZone )
   { 
       this.ingredientsList = formBuilder.group({
-      ingredients: ['', Validators.required],
-      servings: [' ']
+    ingredients:this.formBuilder.array([''], Validators.required)
+     
     });
   }
 
@@ -32,7 +32,7 @@ export class SearchIngredientsPage implements OnInit {
 
   addIngredient(){
     this.ingredientNo++;
-    this.ingredientsList.addControl('ingredient' + this.ingredientNo, new FormControl('', Validators.required));
+    this.ingredientsList.addControl('ingredient' + this.ingredientNo, new FormControl(this.formBuilder.array([''], Validators.required)));
     this.add();
   }
   add()
@@ -44,13 +44,6 @@ export class SearchIngredientsPage implements OnInit {
           },
           error => console.error('Error storing ingredients', error)
         );
-      this.storage.set('servings', this.servings)
-      .then(
-        () => {
-          console.log('Number of servings: ' , this.servings);
-        },
-        error => console.error('Error storing item', error)
-      );
   }//add
   
 onFormSubmit(){

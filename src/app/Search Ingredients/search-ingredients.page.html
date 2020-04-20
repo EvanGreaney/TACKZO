@@ -14,8 +14,6 @@
       <ion-item *ngFor="let control of ingredientsList.controls | keyvalue">
         <ion-input required type="text" formControlName="ingredients" placeHolder="ingredient" required></ion-input>
          </ion-item> <br />
-         <ion-label> How many servings? </ion-label>
-       <ion-input placeholder="000" type="number" formControlName="servings"> </ion-input>
     </form>
 <ion-button expand="full" color="light" (click)="addIngredient()">Add Ingredient</ion-button>
   <ion-button type="submit" color="light">Generate Meal</ion-button>
