@@ -1,5 +1,4 @@
 import { Component, OnInit,NgZone } from '@angular/core';
-import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
 import { FoodService } from '../DataTransfers/food.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,13 +11,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./search-food-type.page.scss'],
 })
 export class SearchFoodTypePage implements OnInit {
-  public food:String;
-  public foodRecipes: Array<any>;
+  public food: String;
+  //API Stuff
+  public Recipes: Array<any>;
   apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
   public foodList: FormGroup;
 
-  constructor(private router: Router,
-    private storage:Storage, 
+  constructor(
+    public storage:Storage, 
     public formBuilder: FormBuilder, 
     private foodApi: FoodService,
     private zone: NgZone,
@@ -31,7 +31,6 @@ export class SearchFoodTypePage implements OnInit {
 
   ngOnInit() {
   }
-
   onFormSubmit(){
 
     this.food = this.foodList.value['food'];
@@ -51,7 +50,6 @@ export class SearchFoodTypePage implements OnInit {
           this.zone.run(() => {
             console.log("All user input added to api")
             this.foodList.reset();
-            //this.router.navigate(['meal-choice'])
           }
         )})
     }//else
@@ -65,11 +63,11 @@ export class SearchFoodTypePage implements OnInit {
     console.log("foodChoice: ", this.food);
 
     this.getFood().subscribe(data =>{
-      this.foodRecipes = data;
-      console.log( this.foodRecipes);
-      this.storage.set("Recipes",this.foodRecipes);
+      this.Recipes = data;
+      console.log( this.Recipes);
+      this.storage.set("Recipes",this.Recipes);
       console.log("food in choice: ",this.food);
-      console.log(this.foodRecipes);
+      console.log(this.Recipes);
       console.log("Storage: ",this.storage.get("Recipes"));
     })
   }
@@ -78,7 +76,6 @@ export class SearchFoodTypePage implements OnInit {
     this.storage.get("newfood").then((getFood)=>{
       console.log("Food chosen in GetFood(): ",getFood);
    });
-
     return this.http.get("https://api.spoonacular.com/recipes/search?query="+this.food+"&number=1&apiKey="+this.apiKey);
   }
 

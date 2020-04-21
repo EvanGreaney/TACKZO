@@ -16,6 +16,19 @@
       <ion-title size="large">Stored Meals</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-list>
+    <ion-button shape="round" (click) = "searchCalories()"> Saved Calorie Search </ion-button> <br/>
+    <ion-button shape="round" (click) = "searchFood()"> Saved Food Item Search </ion-button> <br/>
+    <ion-button shape="round" (click) = "searchIngredients()"> Saved Ingredients Search </ion-button> <br/>
+  </ion-list>
 
-  <app-explore-container name="Stored Meals"></app-explore-container>
+  <ion-content>
+    <ion-card *ngFor="let recipe of Recipes" >
+      <img  width="200" height="200" src = "{{recipe.image}}"/>
+      <ion-card-header>
+        {{recipe.title}}
+      </ion-card-header>
+      
+    </ion-card>
+  </ion-content>
 </ion-content>

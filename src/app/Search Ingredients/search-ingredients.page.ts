@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { IngredientsService } from '../DataTransfers/ingredients.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-ingredients',
@@ -10,19 +12,23 @@ import { IngredientsService } from '../DataTransfers/ingredients.service';
   styleUrls: ['./search-ingredients.page.scss'],
 })
 export class SearchIngredientsPage implements OnInit {
-  public ingredients: Array<String>;
-  public ingredientsList: FormGroup;
-  private ingredientNo: number = 1;
   
+  public ingredients: String;
+  public ingredientsList: FormGroup;
+  
+  //API Stuff
+  public Recipes: Array<any>;
+  apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
 
   constructor(private router: Router,
      private storage:Storage, 
      public formBuilder: FormBuilder, 
      private ingredientsApi: IngredientsService,
-     private zone: NgZone )
+     private zone: NgZone,
+     public http: HttpClient )
   { 
       this.ingredientsList = formBuilder.group({
-    ingredients:this.formBuilder.array([''], Validators.required)
+      ingredients:['', Validators.required]
      
     });
   }
@@ -30,23 +36,13 @@ export class SearchIngredientsPage implements OnInit {
   ngOnInit() {
   }
 
-  addIngredient(){
-    this.ingredientNo++;
-    this.ingredientsList.addControl('ingredient' + this.ingredientNo, new FormControl(this.formBuilder.array([''], Validators.required)));
-    this.add();
-  }
-  add()
-  {
-     this.storage.set('ingredients',this.ingredients)
-        .then(
-          () => {
-            console.log('ingredient added: ' ,this.ingredients);
-          },
-          error => console.error('Error storing ingredients', error)
-        );
-  }//add
-  
 onFormSubmit(){
+  this.ingredients = this.ingredientsList.value['ingredients'];
+    this.storage.set("ingredients",this.ingredients);
+
+    console.log("Ingredients in On Form submit" + this.ingredients);
+
+
   if(!this.ingredientsList.valid)
     {
       console.log("Form empty")
@@ -59,11 +55,35 @@ onFormSubmit(){
           this.zone.run(() => {
             console.log("Ingredient added to api")
             this.ingredientsList.reset();
-            this.router.navigate(['meal-choice'])
+            
           }
         )})
     }//else
+
+    this.choice();
 }
+  choice() {
+    this.storage.set("ingredientsList", this.ingredients);
+    //debugging the storage of user input
+    console.log("Ingredients of meal: ", this.ingredients);
+
+    this.getRecipe().subscribe(data =>{
+      this.Recipes = data;
+      console.log( this.Recipes);
+      this.storage.set("ingredients",this.Recipes);
+      console.log("ingredients in form: ",this.ingredients);
+      console.log(this.Recipes);
+      console.log("Storage: ",this.storage.get("ingredients"));
+    })
+
+    console.log("contents of API ",this.getRecipe());
+  }
+  getRecipe():Observable<any> {
+    this.storage.get("ingredientsList").then((getIngredients)=>{
+      console.log("Ingredients on GetRecipe",getIngredients);
+   });
+   return this.http.get("https://api.spoonacular.com/recipes/findByIngredients?ingredients="+this.ingredients+"&number=1&apiKey="+this.apiKey)
+  }
   
 
 } 

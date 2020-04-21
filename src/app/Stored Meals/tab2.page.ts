@@ -9,4 +9,17 @@ export class Tab2Page {
 
   constructor() {}
 
+  searchFood()
+  {
+
+  }
+
+  searchCalories()
+  {
+
+  }
+
+  searchIngredients(){
+    
+  }
 }

@@ -20,16 +20,12 @@
   </ion-list> 
   
   <ion-content>
-    <ion-card *ngFor="let foodRecipe of foodRecipes">
-      <img  width="200" height="200" src = "{{foodRecipe.urlToImage}}"/>
+    <ion-card *ngFor="let recipe of Recipes" >
+      <img  width="200" height="200" src = "{{recipe.image}}"/>
       <ion-card-header>
-        {{foodRecipe.title}}
+        {{recipe.title}}
       </ion-card-header>
-      <ion-card-content width="200" height="200">
-        readyInMinutes:  {{foodRecipe.readyInMinutes}} 
-        servings: {{foodRecipe.servings}}  
-      </ion-card-content>
-
+      
     </ion-card>
   </ion-content>
 <!--<ion-button shape="round" (click) = "choice()"> Generate </ion-button> <br/>-->

@@ -1,5 +1,4 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
 import { CaloriesService } from '../DataTransfers/calories.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -18,7 +17,7 @@ export class SearchCaloriesPage implements OnInit {
   apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
   public caloriesList: FormGroup;
 
-  constructor(private router: Router,
+  constructor(
     public storage:Storage,
     private caloriesApi: CaloriesService,
     public formBuilder: FormBuilder, 

@@ -4,8 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { SearchFoodTypePage } from './search-food-type.page';
 
 describe('SearchFoodTypePage', () => {
-  type NewType = SearchFoodTypePage;
-  let component: NewType;
+  let component: SearchFoodTypePage;
   let fixture: ComponentFixture<SearchFoodTypePage>;
 
   beforeEach(async(() => {
