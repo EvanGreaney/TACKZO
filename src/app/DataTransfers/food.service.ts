@@ -32,9 +32,9 @@ export class FoodService {
       }
       
       getFoodList(): Observable<Food> {
-        return this.http.get<Food>('http://localhost:4000/api')
+        return this.http.get<Food>('http://localhost:4000/api/food')
          .pipe(
-          tap(ingredients => console.log('All Food items fetched!')),
+          tap(food => console.log('All Food items fetched!')),
           catchError(this.handleError<Food>('Got all food items'))
         );
       }

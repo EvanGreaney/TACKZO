@@ -32,9 +32,9 @@ export class CaloriesService {
       }
       
       getCaloriesList(): Observable<Calories[]> {
-        return this.http.get<Calories[]>('http://localhost:4000/api')
+        return this.http.get<Calories[]>('http://localhost:4000/api/calories')
          .pipe(
-          tap(ingredients => console.log('All Ingredient Lists fetched!')),
+          tap(calories => console.log('All Calories Lists fetched!')),
           catchError(this.handleError<Calories[]>('Get all calories'))
         );
       }

@@ -32,7 +32,7 @@ export class IngredientsService {
   }
   
   getIngredientsList(): Observable<Ingredients[]> {
-    return this.http.get<Ingredients[]>('http://localhost:4000/api')
+    return this.http.get<Ingredients[]>('http://localhost:4000/api/ingredients')
      .pipe(
       tap(ingredients => console.log('All Ingredient Lists fetched!')),
       catchError(this.handleError<Ingredients[]>('Get all Ingredients'))

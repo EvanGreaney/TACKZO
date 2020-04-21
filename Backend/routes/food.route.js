@@ -2,11 +2,11 @@ const express = require('express');
 const foodRoute = express.Router();
 const foodModel = require('../schemas/Food');
 
-//get all mealTypes data
-foodRoute.get('/', function(req,res,next) {
-    foodModel.find(function(err, mealType) {
+//get all food data
+foodRoute.get('/food', function(req,res,next) {
+    foodModel.find(function(err, food) {
         if(err) return next(err);
-        res.json(mealType);
+        res.json(food);
     });
 });
 

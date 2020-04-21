@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 let FoodTypeSchema = new Schema({
     food: { type: String },
-    servings: { type: Number },
 }, {
     collection: 'food'
 })

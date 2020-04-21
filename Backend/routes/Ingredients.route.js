@@ -3,7 +3,7 @@ const ingredientsRoute = express.Router();
 const IngredientsModel = require('../schemas/ingredients')
 
 //GET ALL ingredient Lists
-ingredientsRoute.get('/', function(req,res,next) {
+ingredientsRoute.get('/ingredients', function(req,res,next) {
     IngredientsModel.find(function(err, ingredients){
         if(err) return next(err);
         res.json(ingredients);

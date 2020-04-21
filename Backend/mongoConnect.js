@@ -33,9 +33,10 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../build')));
 app.use('/', express.static(path.join(__dirname, '../build/static')));
-app.use('/api', ingredientsRoute)
-app.use('/api', foodsRoute)
-app.use('/api', caloriesRoute)
+app.use('/api/', caloriesRoute)
+app.use('/api/', ingredientsRoute)
+app.use('/api/', foodsRoute)
+
 
 // PORT number
 const port = process.env.PORT || 4000;

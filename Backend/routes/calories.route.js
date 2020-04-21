@@ -3,7 +3,7 @@ const caloriesRoute = express.Router();
 const CaloriesModel = require('../schemas/calories');
 
 //get all calories data
-caloriesRoute.get('/', function(req,res,next) {
+caloriesRoute.get('/calories', function(req,res,next) {
     CaloriesModel.find(function(err, calories) {
         if(err) return next(err);
         res.json(calories);

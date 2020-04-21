@@ -23,12 +23,27 @@
   </ion-list>
 
   <ion-content>
-    <ion-card *ngFor="let recipe of Recipes" >
-      <img  width="200" height="200" src = "{{recipe.image}}"/>
-      <ion-card-header>
-        {{recipe.title}}
-      </ion-card-header>
-      
+    <ion-card *ngFor="let calories of caloriesData" >
+      <ion-card-content width="200" height="200">
+        Calorie id:  {{calories._id}} <br />
+        Calorie Max Number: {{calories.maxCalories}} 
+       </ion-card-content>
+    </ion-card>
+  </ion-content>
+  <ion-content>
+    <ion-card *ngFor="let food of foodData" >
+      <ion-card-content width="200" height="200">
+        Food id:  {{food._id}} 
+        Food Item: {{food.food}} 
+       </ion-card-content>
+    </ion-card>
+  </ion-content>
+  <ion-content>
+    <ion-card *ngFor="let ingredient of ingredientsData" >
+      <ion-card-content width="200" height="200">
+        Ingredients id:  {{ingredient._id}} <br />
+        Ingredients: {{ingredient.ingredients}} 
+       </ion-card-content>
     </ion-card>
   </ion-content>
 </ion-content>

@@ -1,7 +1,6 @@
 import { Component, OnInit,NgZone } from '@angular/core';
-import { Router } from '@angular/router';
 import{ Storage } from '@ionic/storage';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IngredientsService } from '../DataTransfers/ingredients.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,17 +12,13 @@ import { Observable } from 'rxjs';
 })
 export class SearchIngredientsPage implements OnInit {
 
-  
   public ingredients: String;
   public ingredientsList: FormGroup;
-  
   //API Stuff
   public Recipes: Array<any>;
   apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
 
-
-
-  constructor(private router: Router,
+  constructor(
      private storage:Storage, 
      public formBuilder: FormBuilder, 
      private ingredientsApi: IngredientsService,
