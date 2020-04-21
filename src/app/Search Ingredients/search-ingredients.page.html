@@ -11,14 +11,22 @@
 <ion-content>
   <ion-list lines="full">
     <form [formGroup]="ingredientsList" (ngSubmit)="onFormSubmit()">
-      <ion-label> Ingredients </ion-label>
-      <ion-input placeholder="ingredient1" type="text" formControlName="ingredient1" required> </ion-input>  
-      <ion-input placeholder="ingredient2" type="text" formControlName="ingredient2"> </ion-input>
-      <ion-input placeholder="ingredient3" type="text" formControlName="ingredient3"> </ion-input>
-      <ion-input placeholder="ingredient4" type="text" formControlName="ingredient4"> </ion-input>
-      <ion-input placeholder="ingredient5" type="text" formControlName="ingredient5"> </ion-input>  
-      <ion-button type="submit" color="primary" shape="full" expand="block">Submit form</ion-button>
+
+        <ion-input placeholder="seperate Ingredient with ," required type="text" formControlName="ingredients"  required></ion-input>
+        <ion-button type="submit" color="primary" shape="full" expand="block">Submit form</ion-button>
     </form>
-  <ion-button type="submit" color="light">Generate Meal</ion-button>
+ 
 </ion-list>
+
+<ion-content>
+  <ion-card *ngFor="let recipe of Recipes" >
+    <img  width="200" height="200" src = "{{recipe.image}}"/>
+    <ion-card-header>
+      {{recipe.title}}
+    </ion-card-header>
+    
+    
+    
+  </ion-card>
+</ion-content>
 </ion-content>
