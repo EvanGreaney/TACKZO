@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./search-ingredients.page.scss'],
 })
 export class SearchIngredientsPage implements OnInit {
+
   
   public ingredients: String;
   public ingredientsList: FormGroup;
@@ -19,6 +20,8 @@ export class SearchIngredientsPage implements OnInit {
   //API Stuff
   public Recipes: Array<any>;
   apiKey: String = "ccb5ae09cbc44169be9a30e8888e5e1d";
+
+
 
   constructor(private router: Router,
      private storage:Storage, 
@@ -28,20 +31,25 @@ export class SearchIngredientsPage implements OnInit {
      public http: HttpClient )
   { 
       this.ingredientsList = formBuilder.group({
+
       ingredients:['', Validators.required]
      
+
+    
+
     });
   }
 
   ngOnInit() {
   }
 
+
 onFormSubmit(){
   this.ingredients = this.ingredientsList.value['ingredients'];
     this.storage.set("ingredients",this.ingredients);
 
     console.log("Ingredients in On Form submit" + this.ingredients);
-
+  
 
   if(!this.ingredientsList.valid)
     {
@@ -55,7 +63,10 @@ onFormSubmit(){
           this.zone.run(() => {
             console.log("Ingredient added to api")
             this.ingredientsList.reset();
+
             
+
+
           }
         )})
     }//else

@@ -11,10 +11,11 @@
 <ion-content>
   <ion-list lines="full">
     <form [formGroup]="ingredientsList" (ngSubmit)="onFormSubmit()">
+
         <ion-input placeholder="seperate Ingredient with ," required type="text" formControlName="ingredients"  required></ion-input>
         <ion-button type="submit" color="primary" shape="full" expand="block">Submit form</ion-button>
     </form>
-  
+ 
 </ion-list>
 
 <ion-content>
