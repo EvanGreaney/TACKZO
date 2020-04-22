@@ -65,10 +65,10 @@ export class SearchFoodTypePage implements OnInit {
     this.getFood().subscribe(data =>{
       this.Recipes = data;
       console.log( this.Recipes);
-      this.storage.set("Recipes",this.Recipes);
+      /*this.storage.set("Recipes",this.Recipes);
       console.log("food in choice: ",this.food);
       console.log(this.Recipes);
-      console.log("Storage: ",this.storage.get("Recipes"));
+      console.log("Storage: ",this.storage.get("Recipes"));*/
     })
   }
 

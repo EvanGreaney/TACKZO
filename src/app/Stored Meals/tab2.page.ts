@@ -26,7 +26,7 @@ export class Tab2Page {
     this.foodApi.getFoodList()
     .subscribe((fdata) => {
       console.log(fdata)
-     this.foodData = fdata;
+     //this.foodData = fdata;
     });
   }
 

@@ -31,18 +31,18 @@
     </ion-card>
   </ion-content>
   <ion-content>
-    <ion-card *ngFor="let food of foodData" >
-      <ion-card-content width="200" height="200">
-        Food id:  {{food._id}} 
-        Food Item: {{food.food}} 
-       </ion-card-content>
-    </ion-card>
-  </ion-content>
-  <ion-content>
     <ion-card *ngFor="let ingredient of ingredientsData" >
       <ion-card-content width="200" height="200">
         Ingredients id:  {{ingredient._id}} <br />
         Ingredients: {{ingredient.ingredients}} 
+       </ion-card-content>
+    </ion-card>
+  </ion-content>
+  <ion-content>
+    <ion-card *ngFor="let food of foodData" >
+      <ion-card-content width="200" height="200">
+        Food id:  {{food._id}} 
+        Food Item: {{food.food}} 
        </ion-card-content>
     </ion-card>
   </ion-content>
